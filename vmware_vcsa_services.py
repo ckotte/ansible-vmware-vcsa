@@ -150,7 +150,7 @@ def configure_vmon_services(module, vcsa_url, vcsa_username, vcsa_password, vcsa
                         body = {"spec": {"startup_type": vcsa_startup_type.upper()}}
                         try:
                             (rc, response) = request(url=vcsa_url + "/appliance/vmon/service/%s" % vmon_service['key'], url_username=vcsa_username, url_password=vcsa_password,
-                                                     validate_certs=validate_certs, headers=headers, data=bytes(json.dumps(body), encoding="utf-8"), method='PATCH')
+                                                     validate_certs=validate_certs, headers=headers, data=bytes(json.dumps(body).encode("utf-8")), method='PATCH')
                         except:
                             err = get_exception()
                             module.fail_json(msg="Failed to set startup type to %s. Error [%s]." % (vcsa_startup_type, str(err)))

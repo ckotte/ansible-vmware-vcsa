@@ -202,7 +202,7 @@ def configure_vcsa_update(module, vcsa_url, vcsa_username, vcsa_password, auto_s
                 body = {"policy": body_policy}
                 try:
                     (rc, response) = request(url=vcsa_url + "/appliance/update/policy", url_username=vcsa_username, url_password=vcsa_password,
-                                             validate_certs=validate_certs, headers=headers, data=bytes(json.dumps(body), encoding="utf-8"), method='PUT')
+                                             validate_certs=validate_certs, headers=headers, data=bytes(json.dumps(body).encode("utf-8")), method='PUT')
                 except:
                     err = get_exception()
                     module.fail_json(msg="Failed to set valid_days for %s. Error [%s]." % (account, str(err)))
